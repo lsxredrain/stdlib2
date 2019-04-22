@@ -54,6 +54,7 @@ lift(F) ->
     {ok, Res}          -> {ok, Res};
     error              -> {error, error};
     {error, Rsn}       -> {error, Rsn};
+    {'EXIT',Rsn}       -> {error, Rsn};
     Res                -> {ok, Res}
   end.
 
