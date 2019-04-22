@@ -50,14 +50,11 @@ do_test() ->
 -spec lift(fun()) -> maybe(_, _).
 %% @doc lift(F) is the value of F() lifted into the maybe monad.
 lift(F) ->
-  try F() of
+  case catch F() of
     {ok, Res}          -> {ok, Res};
     error              -> {error, error};
     {error, Rsn}       -> {error, Rsn};
     Res                -> {ok, Res}
-  catch
-    throw:{error, Rsn} -> {error, Rsn};
-    _:Exn              -> {error, {lifted_exn, Exn, erlang:get_stacktrace()}}
   end.
 
 
