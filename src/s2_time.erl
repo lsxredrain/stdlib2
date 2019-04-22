@@ -33,7 +33,6 @@ stamp(os)     -> now_to_microsecs(os:timestamp()).
 
 monotonic_us() ->
     erlang:monotonic_time(micro_seconds) + erlang:time_offset(micro_seconds).
--endif.
 
 stamp_test() -> ?assert(stamp()   < stamp()),
                 ?assert(stamp(os) < stamp(os)).
